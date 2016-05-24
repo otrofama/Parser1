@@ -20,14 +20,17 @@
 %option yylineno
 
 digito [0-9]
+letra [a-zA-Z]
 %%
 
 "+" {return MAS;}
 "*" {return MUL;}
 "(" {return LPAR;}
-
 ")" {return RPAR;}
-
+"="	{return ASIG;}
+"["	{return CA;}
+"]"	{return CD;}
+";"	{return PC;}
 {digito}+ {yylval.num.val=atoi(yytext);
 		  yylval.num.type = 0;
 		  yylval.num.code = (char*)realloc(yylval.num.code,yyleng*sizeof(char));
@@ -40,6 +43,8 @@ digito [0-9]
 		  strcpy(yylval.sval,yytext);
 		  return ID;		
 		  }
+		  
+
 "\n"	{return NL;}
 
 [ \t\r] {}

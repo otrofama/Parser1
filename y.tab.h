@@ -49,9 +49,13 @@ extern int yydebug;
     LPAR = 259,
     RPAR = 260,
     NL = 261,
-    NUM = 262,
-    MAS = 263,
-    MUL = 264
+    ASIG = 262,
+    CA = 263,
+    CD = 264,
+    PC = 265,
+    NUM = 266,
+    MAS = 267,
+    MUL = 268
   };
 #endif
 /* Tokens.  */
@@ -59,9 +63,13 @@ extern int yydebug;
 #define LPAR 259
 #define RPAR 260
 #define NL 261
-#define NUM 262
-#define MAS 263
-#define MUL 264
+#define ASIG 262
+#define CA 263
+#define CD 264
+#define PC 265
+#define NUM 266
+#define MAS 267
+#define MUL 268
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -82,7 +90,7 @@ union YYSTYPE
 		char* code;
 	}type;
 
-#line 86 "y.tab.h" /* yacc.c:1909  */
+#line 94 "y.tab.h" /* yacc.c:1909  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1

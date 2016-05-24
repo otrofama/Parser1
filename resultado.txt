@@ -1,0 +1,9 @@
+F->num
+T->F
+E->T
+S->id=E;
+L->S
+T->F
+E->T
+L->E NL
+P->L

@@ -38,29 +38,48 @@ extern FILE* yyin;
 }
 
 %token<sval> ID
-%token LPAR RPAR NL
+%token LPAR RPAR NL ASIG CA CD PC
 %token<num> NUM
 
 %left MAS
 %left MUL
 
-%type<type> exp term fac
+%type<type> exp term fac sent
 
 %start program
 
 %%
 
 program: program list {
-			printf("P->PL\n");
-			fprintf(yyout,"P->PL\n");
-			} | list {
-				printf("P->L\n");
-				fprintf(yyout,"P->L\n");
-			};
+		printf("P->PL\n");
+		fprintf(yyout,"P->PL\n");
+		} | list {
+			printf("P->L\n");
+			fprintf(yyout,"P->L\n");
+		};
 
 list: exp NL{
 		printf("L->E NL\n");
 		fprintf(yyout,"L->E NL\n");
+		};	
+
+sent: ID ASIG exp PC{
+		printf("S->id=E;\n");
+		$1=(char*)malloc(2*sizeof(char));
+		strcpy($$.code,$1);
+		printf("%s=%s;\n",$$.code,$3.code);
+
+		fprintf(yyout,"S->id=E;\n");
+		} | line ASIG exp PC{
+			printf("S->L=E;\n");
+			fprintf(yyout,"S->L=E;\n");
+		};
+
+line: ID CA exp CD{
+		printf("L->id[E]\n");
+		fprintf(yyout,"L->id[E]\n");
+		}|	line CA exp CD{
+			printf("L->L[E]");
 		};
 
 exp:	exp MAS term {
@@ -113,7 +132,10 @@ fac: LPAR exp RPAR{
 			strcpy($$.code,$1.code);
 			printf("F->num\n");
 			fprintf(yyout,"F->num\n");
-		}
+		}|	sent {
+			printf("L->S\n");
+			fprintf(yyout,"L->S\n");
+		};
 %%
 
 void yyerror()
