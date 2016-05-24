@@ -3,7 +3,7 @@
 /*
 *
 *	Compiladores
-*	19-mayo-2016
+*	23-mayo-2016
 *
 *	parser.y
 *	Olivares Castillo José Luis
@@ -69,9 +69,6 @@ sent: ID ASIG exp PC{
 //		strcpy($$.code,$1);
 //		printf("%s=%s;\n",$$.code,$3.code);
 		fprintf(yyout,"S->id=E;\n");
-		} | line ASIG exp PC{
-			printf("S->L=E;\n");
-			fprintf(yyout,"S->L=E;\n");
 		};
 
 line: ID CA exp CD{
@@ -79,6 +76,7 @@ line: ID CA exp CD{
 		fprintf(yyout,"L->id[E]\n");
 		}|	line CA exp CD{
 			printf("L->L[E]");
+			fprintf(yyout,"L->L[E]");
 		};
 
 exp:	exp MAS term {
@@ -132,8 +130,11 @@ fac: LPAR exp RPAR{
 			printf("F->num\n");
 			fprintf(yyout,"F->num\n");
 		}|	sent {
-			printf("L->S\n");
-			fprintf(yyout,"L->S\n");
+			printf("F->S\n");
+			fprintf(yyout,"F->S\n");
+		}| line{
+			printf("F->L\n");
+			fprintf(yyout,"F->L\n");
 		};
 %%
 

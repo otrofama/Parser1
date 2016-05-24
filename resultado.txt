@@ -2,8 +2,29 @@ F->num
 T->F
 E->T
 S->id=E;
-L->S
+F->S
 T->F
 E->T
 L->E NL
 P->L
+F->num
+T->F
+E->T
+F->id
+T->F
+F->num
+T->F
+F->id
+t1 = 3 * id3
+T->T*F
+E->T
+F->num
+T->F
+t2 = t1 + 8
+E->E+T
+t3 = id2 * t2
+T->T*F
+t4 = 12 + t3
+E->E+T
+L->E NL
+P->PL
